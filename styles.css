@@ -1,0 +1,50 @@
+/*
+
+This CSS file will be included with your plugin, and
+available in the app when your plugin is enabled.
+
+If your plugin does not need CSS, delete this file.
+
+*/
+.width-slider-container {
+	display: flex;
+	align-items: center;
+	gap: var(--size-4-1);
+	position: relative;
+	padding: 0;
+}
+
+.width-value {
+	color: inherit;
+	display: inline-flex;
+	line-height: 1;
+	padding: 3px var(--size-2-2);
+	border-radius: var(--radius-s);
+	font-size: var(--font-adaptive-smallest);
+	align-items: center;
+	height: 100%;
+	background-color: transparent;
+	cursor: pointer;
+	position: relative;
+}
+.width-value::after {
+	content: "\021BA";
+	display: flex;
+	align-items: center;
+	line-height: 0;
+	justify-content: center;
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	padding: 0 var(--size-2-2);
+	color: transparent;
+	font-size: var(--font-adaptive-smallest);
+}
+.width-value:hover {
+	background-color: var(--background-modifier-hover);
+	color: transparent;
+}
+.width-value:hover::after {
+	color: var(--text-normal);
+}
