@@ -2,7 +2,7 @@
 
 ![Obsidian Downloads](https://img.shields.io/badge/dynamic/json?logo=obsidian&color=%23483699&label=downloads&query=%24%5B%22editor-width%22%5D.downloads&url=https%3A%2F%2Fraw.githubusercontent.com%2Fobsidianmd%2Fobsidian-releases%2Fmaster%2Fcommunity-plugin-stats.json)
 
-Modify Obsidian's editor width with a simple slider in the footer.
+Modify Obsidian's editor width with a simple slider in the footer. This plugin was inspired by the currently non-functional [obsidian-editor-width-slider](https://github.com/MugishoMp/obsidian-editor-width-slider).
 
 ## Features
 
