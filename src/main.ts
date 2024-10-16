@@ -32,7 +32,7 @@ export default class EditorWidthSlider extends Plugin {
 		rangeInput.min = "0";
 		rangeInput.max = "100";
 		rangeInput.value = this.settings.sliderPercentage;
-		rangeInput.style.width = this.settings.sliderWidth + "px";
+		rangeInput.className = this.settings.sliderWidth;
 
 		// Add event listener to the slider
 		rangeInput.addEventListener("input", (event) => {
@@ -112,8 +112,12 @@ export default class EditorWidthSlider extends Plugin {
 		else {
 			styleElement.innerText = `
 				body {
-					--line-width: calc(31rem + .75 * ${this.settings.sliderPercentage}rem) !important;
-				  	--file-line-width: calc(31rem + .75 * ${this.settings.sliderPercentage}rem) !important;
+					--line-width: calc(20rem + ( ${
+						parseInt(this.settings.sliderPercentage) / 100
+					} * ( 88% - 20rem ) ) ) !important;
+				  	--file-line-width: calc(20rem + ( ${
+						parseInt(this.settings.sliderPercentage) / 100
+					} * ( 88% - 20rem ) ) ) !important;
 				}
 			`;
 		}
@@ -140,7 +144,10 @@ export default class EditorWidthSlider extends Plugin {
 
 	updateEditorStyleYAML() {
 		// if there is yaml frontmatter, take info from yaml, otherwise take info from slider
-		const file = this.app.workspace.getActiveFile() as TFile; // Currently Open Note
+		const file = this.app.workspace.getActiveFile(); // Currently Open Note
+		if (!(file instanceof TFile)) {
+			return;
+		}
 		if (file.name) {
 			const metadata = this.app.metadataCache.getFileCache(file);
 			// const metadata = app.vault.metadataCache.getFileCache(file);
@@ -182,7 +189,7 @@ export default class EditorWidthSlider extends Plugin {
 		if (!rangeInput) {
 			throw new Error("width slider element not found");
 		} else {
-			rangeInput.style.width = this.settings.sliderWidth + "px";
+			rangeInput.className = this.settings.sliderWidth;
 		}
 	}
 

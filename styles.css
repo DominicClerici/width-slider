@@ -13,8 +13,27 @@ If your plugin does not need CSS, delete this file.
 	position: relative;
 	padding: 0;
 }
+#width-slider.xs {
+	width: 50px;
+}
+#width-slider.sm {
+	width: 100px;
+}
+#width-slider.default {
+	width: 150px;
+}
+#width-slider.lg {
+	width: 200px;
+}
+#width-slider.xl {
+	width: 250px;
+}
+#width-slider.xxl {
+	width: 350px;
+}
 
 .width-value {
+	min-width: 28px;
 	color: inherit;
 	display: inline-flex;
 	line-height: 1;
@@ -31,13 +50,14 @@ If your plugin does not need CSS, delete this file.
 	content: "\021BA";
 	display: flex;
 	align-items: center;
+	text-align: center;
 	line-height: 0;
 	justify-content: center;
 	position: absolute;
+	width: 100%;
 	right: 0;
 	top: 0;
 	bottom: 0;
-	padding: 0 var(--size-2-2);
 	color: transparent;
 	font-size: var(--font-adaptive-smallest);
 }

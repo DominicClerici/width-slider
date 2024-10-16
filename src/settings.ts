@@ -5,9 +5,9 @@ import ChangeEditorWidth from "./main";
 // ---------------------------- Storing Information ----------------------------
 // the default value of the thing you want to store
 export const DEFAULT_SETTINGS: EditorWidthSliderSettings = {
-	sliderPercentage: "20",
-	sliderPercentageDefault: "20",
-	sliderWidth: "150",
+	sliderPercentage: "40",
+	sliderPercentageDefault: "40",
+	sliderWidth: "default",
 };
 // ---------------------------- Storing Information ----------------------------
 
@@ -27,30 +27,41 @@ export class EditorWidthSliderSettingTab extends PluginSettingTab {
 		new Setting(containerEl)
 			.setName("Slider Width")
 			.setDesc("Width of the slider in the document footer.")
-			.addText((text) =>
-				text
-					.setPlaceholder("Slider width in px")
-					.setValue(this.plugin.settings.sliderWidth)
-					.onChange(async (value) => {
-						if (value === "") {
-							value = "150";
-						}
-						this.plugin.settings.sliderWidth = value;
-						this.plugin.updateSliderStyle();
-						await this.plugin.saveSettings();
-					})
-			);
+			.addDropdown((dd) => {
+				// has values xs: 50 sm: 100 default: 150 lg: 200 xl: 250 xxl:350
+				dd.addOption("xs", "Tiny");
+				dd.addOption("sm", "Small");
+				dd.addOption("default", "Default");
+				dd.addOption("lg", "Large");
+				dd.addOption("xl", "Very large");
+				dd.addOption("xxl", "Huge");
+				dd.setValue(this.plugin.settings.sliderWidth);
+				dd.onChange(async (value) => {
+					this.plugin.settings.sliderWidth = value;
+					this.plugin.updateSliderStyle();
+					await this.plugin.saveSettings();
+				});
+			});
 
 		new Setting(containerEl)
-			.setName("Slider Default Percentage")
-			.setDesc("What do you want the default value of the slider to be?")
+			.setName("Slider Reset Value")
+			.setDesc(
+				"Editor width (0-100) that will be applied when the slider reset button is pushed. Default is 40."
+			)
 			.addText((text) =>
 				text
 					.setPlaceholder("20")
 					.setValue(this.plugin.settings.sliderPercentageDefault)
 					.onChange(async (value) => {
-						if (value === "") {
+						if (isNaN(parseInt(value))) {
 							value = "20";
+						}
+						if (parseInt(value) < 0) {
+							value = "0";
+						}
+
+						if (parseInt(value) > 100) {
+							value = "100";
 						}
 						this.plugin.settings.sliderPercentageDefault = value;
 						this.plugin.updateSliderStyle();
